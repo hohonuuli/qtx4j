@@ -1,22 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mbari</groupId>
-    <artifactId>qt4j</artifactId>
+    <artifactId>qtx4j</artifactId>
     <packaging>jar</packaging>
     <version>0.8-SNAPSHOT</version>
-    <name>QT4J</name>
+    <name>QTX4J</name>
     <url>http://oceana.shore.mbari.org/projects/${project.artifactId}</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
     <scm>
-        <connection>scm:svn:svn+ssh://kahuna.shore.mbari.org/svn/repos/qt4j/trunk/qt4j</connection>
-        <developerConnection>scm:svn:svn+ssh://kahuna.shore.mbari.org/svn/repos/qt4j/trunk/qt4j</developerConnection>
-        <url>http://kahuna.shore.mbari.org/viewvc/qt4j/trunk/qt4j</url>
+        <connection>scm:svn:http://qtx4j.googlecode.com/svn/trunk</connection>
+        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/trunk</developerConnection>
+        <url>https://qtx4j.googlecode.com/svn/trunk</url>
     </scm> 
     <developers>
         <developer>
             <id>brian</id>
             <name>Brian Schlining</name>
-            <email>brian@mbari.org</email>
+            <email>bschlining@gmail.com</email>
             <roles>
                 <role>Lead Engineer</role>
             </roles>
@@ -111,7 +111,7 @@
         </dependency>
         <dependency>
             <groupId>org.mbari</groupId>
-            <artifactId>mbari-extensions</artifactId>
+            <artifactId>mbarix4j</artifactId>
             <version>[1.1,)</version>
             <scope>compile</scope>
         </dependency>
