@@ -1,0 +1,12 @@
+$Id: README.txt 549 2007-04-23 21:50:30Z brian $
+QT4J is short-hand for QuickTime for Java. This project encapsulates Java 
+components that interact with Apple's QuickTime for Java SDK. In order to build 
+this project you will need to install QuickTime for Java and the Java Advanced 
+Imaging library
+
+This project is built using Maven 2 (http://maven.apache.org). To build it type 'mvn package' at the command line. The resulting build will be target/qt4j-[version].jar
+
+EXAMPLE FOR RUNNING CLASS FROM COMMAND LINE                         -->
+mvn exec:java -Dexec.mainClass=org.mbari.qt.examples.TimeCodeTrackExample -Dexec.keepAlive=true
+
+QT4J requires that the Java Advanced imaging library is available. 
