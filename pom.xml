@@ -1,17 +1,18 @@
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mbari</groupId>
     <artifactId>qtx4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
     <name>QTX4J</name>
     <url>http://oceana.shore.mbari.org/projects/${project.artifactId}</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
     <scm>
-        <connection>scm:svn:http://qtx4j.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/trunk</developerConnection>
-        <url>https://qtx4j.googlecode.com/svn/trunk</url>
-    </scm> 
+        <connection>scm:svn:http://qtx4j.googlecode.com/svn/tags/qtx4j-0.8</connection>
+        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/tags/qtx4j-0.8</developerConnection>
+        <url>https://qtx4j.googlecode.com/svn/tags/qtx4j-0.8</url>
+    </scm>
     <developers>
         <developer>
             <id>brian</id>
@@ -22,7 +23,7 @@
             </roles>
             <organization>MBARI</organization>
             <timezone>-8</timezone>
-        </developer>         
+        </developer>
     </developers>
     <issueManagement>
         <system>jira</system>
@@ -90,9 +91,9 @@
         </profile>
     </profiles>
     <dependencies>
-        <!-- IMPORTANT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-        <!-- QuickTime for Java is also need to build this app               -->
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- IMPORTANT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- QuickTime for Java is also need to build this app               -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
             <groupId>foxtrot</groupId>
             <artifactId>foxtrot</artifactId>
@@ -145,7 +146,7 @@
             <version>1.2.14</version>
             <scope>test</scope>
         </dependency>
-        <!-- <dependency>
+<!-- <dependency>
             <groupId>javax.media</groupId>
             <artifactId>jai_core</artifactId>
             <version>1.1.2_01</version>
@@ -154,7 +155,7 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- Use Java 5.0 -->
+<!-- Use Java 5.0 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -163,8 +164,7 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
-            
-            <!-- Create source and javadoc jars when deploying -->
+<!-- Create source and javadoc jars when deploying -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -175,6 +175,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+<!-- Excluding tests for now. Google Code won't let me put test movies in the SVN repository -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*.java</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -188,10 +198,6 @@
                         <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
                     </links>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -234,11 +240,11 @@
             </plugin>
         </plugins>
     </reporting>
-    <distributionManagement> 
-        <repository> 
-            <id>mbari-repository</id> 
-            <name>MBARI Repository</name> 
-            <url>scp://oceana.shore.mbari.org/var/www/html/maven2</url> 
+    <distributionManagement>
+        <repository>
+            <id>mbari-repository</id>
+            <name>MBARI Repository</name>
+            <url>scp://oceana.shore.mbari.org/var/www/html/maven2</url>
         </repository>
         <site>
             <id>oceana.shore.mbari.org</id>
