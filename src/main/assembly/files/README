@@ -1,0 +1,6 @@
+To use the qtx4j API's, include the following jars on your classpath:
+	mbarix4j
+	slf4j-api
+	vcr4j
+	
+You will also need to have QuickTime for Java installed. This is automatically installed if you run the QuickTime installer from Apple or if you have installed iTunes.
