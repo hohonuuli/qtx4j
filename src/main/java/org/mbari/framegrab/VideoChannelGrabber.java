@@ -16,7 +16,6 @@ import quicktime.QTException;
 import quicktime.QTSession;
 import quicktime.qd.Pict;
 import quicktime.qd.QDGraphics;
-import quicktime.std.StdQTException;
 import quicktime.std.sg.SGVideoChannel;
 import quicktime.std.sg.SequenceGrabber;
 
@@ -55,7 +54,7 @@ public class VideoChannelGrabber extends AbstractGrabber {
             sgVideoChannel = new SGVideoChannel(sequenceGrabber);
         }
         catch (Exception e) {
-            throw new GrabberException("Failed to initialize QuickTime components");
+            throw new GrabberException("Failed to initialize QuickTime components", e);
         }
     }
 
