@@ -106,10 +106,18 @@ public class QT {
          *               [Behavior flags],
          *               [The movie exporter used to export]
          */
-        movie.convertToFile(null, qtFile, StdQTConstants.kQTFileTypeMovie, StdQTConstants.kMoviePlayer,
-                            IOConstants.smSystemScript,
-                            (StdQTConstants.showUserSettingsDialog | StdQTConstants.movieToFileOnlyExport
-                             | StdQTConstants.movieFileSpecValid), exporter);
+        movie.convertToFile(null, 
+                qtFile, 
+                StdQTConstants.kQTFileTypeMovie, 
+                StdQTConstants.kMoviePlayer,
+                IOConstants.smSystemScript,
+                (StdQTConstants.movieToFileOnlyExport | StdQTConstants.movieFileSpecValid), 
+                exporter);
+        // The lines below show an export settings dialog
+//        movie.convertToFile(null, qtFile, StdQTConstants.kQTFileTypeMovie, StdQTConstants.kMoviePlayer,
+//                            IOConstants.smSystemScript,
+//                            (StdQTConstants.showUserSettingsDialog | StdQTConstants.movieToFileOnlyExport
+//                             | StdQTConstants.movieFileSpecValid), exporter);
         exporter.disposeQTObject();
     }
 
