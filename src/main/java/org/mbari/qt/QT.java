@@ -122,7 +122,8 @@ public class QT {
     }
 
     /**
-     * Export a movie into a single (flat) file.
+     * Export a movie into a single (flat) file. Also configures the movie for
+     * <i>fast start</i>
      *
      * @param movie The movie to flatten
      * @param file The target that the flattened movie will be saved to. If it
@@ -142,14 +143,16 @@ public class QT {
         QTFile qtFile = new QTFile(file);
         movie.setProgressProc();
         movie.flatten((StdQTConstants.flattenAddMovieToDataFork
-                       | StdQTConstants.flattenForceMovieResourceBeforeMovieData), qtFile,    // file out
+                       | StdQTConstants.flattenForceMovieResourceBeforeMovieData), 
+                      qtFile,    // file out
                       StdQTConstants.kMoviePlayer,                    // creator
                       IOConstants.smSystemScript,                     // scriptTag
-                      StdQTConstants.createMovieFileDeleteCurFile,    // Delete existing file at target location
+                      (StdQTConstants.createMovieFileDeleteCurFile
+                      | StdQTConstants.createMovieFileDontCreateResFile),    // Delete existing file at target location
                       StdQTConstants.movieInDataForkResID,            // resId
                       null);                                          // resName
-
     }
+        
 
     private static QT getInstance() throws QTException {
         if (instance == null) {
