@@ -41,6 +41,11 @@
             <url>http://oceana.shore.mbari.org/maven2</url>
         </repository>
         <repository>
+            <id>VARS</id>
+            <name>VARS Repository</name>
+            <url>http://vars.sourceforge.net/maven2</url>
+        </repository>
+        <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net Repository for Maven</name>
             <url>https://maven2-repository.dev.java.net/nonav/repository</url>
@@ -261,14 +266,23 @@
         </plugins>
     </reporting>
     <distributionManagement>
-        <repository>
+        <!-- <repository>
             <id>mbari-repository</id>
             <name>MBARI Repository</name>
             <url>scp://oceana.shore.mbari.org/var/www/html/maven2</url>
-        </repository>
+        </repository> 
         <site>
             <id>oceana.shore.mbari.org</id>
             <url>scp://oceana.shore.mbari.org/var/www/html/projects/${project.artifactId}</url>
+        </site> -->
+        <repository>
+            <id>vars-repository</id>
+            <name>VARS Repository</name>
+            <url>scp://shell.sourceforge.net/home/groups/v/va/vars/htdocs/maven2</url>
+        </repository>
+        <site>
+            <id>vars.sourceforge.net</id>
+            <url>scp://shell.sourceforge.net/home/groups/v/va/vars/htdocs/projects/${project.artifactId}</url>
         </site>
     </distributionManagement>
 </project>

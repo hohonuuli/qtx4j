@@ -11,6 +11,7 @@ package org.mbari.vars.annotation.ui.dispatchers;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import org.mbari.qt.QT;
 import org.mbari.util.Dispatcher;
 import quicktime.std.movies.Movie;
 
@@ -24,7 +25,7 @@ public class MovieChangeListener4QTMOVIEFRAME implements PropertyChangeListener{
     private final Object defaultValue;
     
     /**
-     * @param grabberDispatcher Should be PredefinedDispatcher.QTMOVIEFRAME.getDispatcher()
+     * @param qtMovieFrameDispatcher Should be PredefinedDispatcher.QTMOVIEFRAME.getDispatcher()
      * @param defaultValue Should be PredefinedDispatcher.QTMOVIEFRAME.getDefaultValue()
      */
     public MovieChangeListener4QTMOVIEFRAME(final Dispatcher qtMovieFrameDispatcher, Object defaultValue) {
