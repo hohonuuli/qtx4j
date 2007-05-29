@@ -4,14 +4,14 @@
     <groupId>org.mbari</groupId>
     <artifactId>qtx4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.9-SNAPSHOT</version>
+    <version>0.9</version>
     <name>QTX4J</name>
     <url>http://oceana.shore.mbari.org/projects/${project.artifactId}</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
     <scm>
-        <connection>scm:svn:http://qtx4j.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/trunk</developerConnection>
-        <url>https://qtx4j.googlecode.com/svn/trunk</url>
+        <connection>scm:svn:http://qtx4j.googlecode.com/svn/tags/qtx4j-0.9</connection>
+        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/tags/qtx4j-0.9</developerConnection>
+        <url>https://qtx4j.googlecode.com/svn/tags/qtx4j-0.9</url>
     </scm>
     <developers>
         <developer>
