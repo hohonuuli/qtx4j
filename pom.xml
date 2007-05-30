@@ -35,11 +35,11 @@
             <name>Ibiblio Repository</name>
             <url>http://www.ibiblio.org/maven2</url>
         </repository>
-        <repository>
+        <!-- <repository>
             <id>MBARI</id>
             <name>MBARI Repository</name>
             <url>http://oceana.shore.mbari.org/maven2</url>
-        </repository>
+        </repository> -->
         <repository>
             <id>VARS</id>
             <name>VARS Repository</name>
