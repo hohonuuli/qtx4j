@@ -13,9 +13,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import org.mbari.util.Dispatcher;
 import org.mbari.vcr.IVCR;
-import org.mbari.vcr.StateMonitoringVCR;
 import org.mbari.vcr.qt.TimeSource;
 import org.mbari.vcr.qt.VCR;
+import org.mbari.vcr.timer.DefaultMonitoringVCR;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import quicktime.std.movies.Movie;
@@ -47,13 +47,11 @@ public class MovieChangeListener4VCR implements PropertyChangeListener {
             vcrDispatcher.setValueObject(defaultVcr);
             
             try {
-                IVCR vcr = new StateMonitoringVCR(new VCR(movie, TimeSource.TIMECODETRACK));
+                IVCR vcr = new DefaultMonitoringVCR(new VCR(movie, TimeSource.TIMECODETRACK));
                 vcrDispatcher.setValueObject(vcr);
-                //PredefinedDispatcher.VCR.getDispatcher().setValueObject(vcr);
             } catch (Exception e) {
                 log.error("Error occurred while creating VCR", e);
                 vcrDispatcher.setValueObject(defaultVcr);
-                //PredefinedDispatcher.VCR.reset();
             }
             
         }
