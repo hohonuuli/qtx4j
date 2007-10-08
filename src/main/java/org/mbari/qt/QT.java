@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
 import org.mbari.qt.awt.QTMovieFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -396,17 +397,37 @@ public class QT {
     
     /**
      * Opens a movie player for playing the movie.
+     * @param movie The movie file to play
      * @return A Frame that is displaying the current movie.
      */
     public static Frame playMovie(Movie movie) {
+            // Create and show a frame for movie        
         Frame frame = null;
         try {
-            // Create and show a frame for mov
             frame = new QTMovieFrame(movie);
             frame.setVisible(true);
-        } catch (QTException ex) {
-            log.error("Failed to create movie player");
+        }
+        catch (QTException ex) {
+            log.error("Unable to open movie frame", ex);
+        }
+        return frame;
+
+    }
+    
+    /**
+     * Opens a movie player for playing the movie.
+     * @param url The url that points to a movie file
+     * @return A Frame that is displaying the current movie.
+     */
+    public static Frame playMovie(URL url) {
+        Frame frame = null;
+        try {
+            frame = playMovie(QT.openMovieFromUrl(url));
+        }
+        catch (QTException ex) {
+            log.error("Unable to open movie frame for " + url, ex);
         }
         return frame;
     }
+    
 }
