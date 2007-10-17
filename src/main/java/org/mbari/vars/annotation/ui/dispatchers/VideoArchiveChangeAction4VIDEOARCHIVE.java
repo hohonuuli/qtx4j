@@ -49,6 +49,7 @@ public class VideoArchiveChangeAction4VIDEOARCHIVE  {
     /**
      * @param url The url refering to a Movie file to be opened. <b>null</b> is
      * acceptable
+     * @throws org.mbari.qt.QT4JException 
      */
     public void doAction(URL url) throws QT4JException {
         /*

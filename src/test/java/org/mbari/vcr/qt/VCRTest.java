@@ -26,10 +26,7 @@ import org.mbari.qt.awt.QTMovieFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import quicktime.QTException;
-import quicktime.QTSession;
-import quicktime.std.StdQTConstants;
 import quicktime.std.movies.Movie;
-import quicktime.std.movies.media.DataRef;
 
 /**
  * @author brian
@@ -50,8 +47,9 @@ public class VCRTest {
      * @throws InterruptedException
      * @throws MalformedURLException
      * @throws QTException
+     * @throws org.mbari.qt.QT4JException 
      */
-    public void run(String urlPath) throws QTException, InterruptedException, MalformedURLException, QT4JException {
+    public void run(String urlPath) throws InterruptedException, MalformedURLException, QT4JException, QTException {
         QT.manageSession();
 
 

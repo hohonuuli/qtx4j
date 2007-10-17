@@ -17,7 +17,8 @@ import java.net.URL;
  */
 public class SupportUtil {
     
-    public static final String DEFAULT_MOVIE = "/wonderwall.mov";
+    //public static final String DEFAULT_MOVIE = "/wonderwall.mov";
+    public static final String DEFAULT_MOVIE = "/Users/brian/workspace/vars-csiro/20071011231117_S1_N1.mov";
     public static final String TIMECODE_MOVIE = "/cystisoma.mov";
     public static final float FRAMERATE_NETWORK = 29.97F;
     public static final float FRAMERATE_DEFAULT = 11.60F;

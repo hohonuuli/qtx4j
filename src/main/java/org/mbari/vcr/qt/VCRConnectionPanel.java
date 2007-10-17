@@ -25,6 +25,7 @@ public class VCRConnectionPanel extends org.mbari.vcr.ui.VCRConnectionPanel {
     /** Creates new form VCRConnectionPanel */
     public VCRConnectionPanel() {
         initComponents();
+        timeSourceComboBox.setSelectedItem(TimeSource.AUTO);
     }
     
     /** This method is called from within the constructor to

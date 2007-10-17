@@ -209,7 +209,7 @@ public class TimeUtil {
     
     
     
-        /**
+    /**
      * Gets the current runtime of the movie. i.e. A formated object that displays the current frame of the movie that
      * is supplied. The proper usage of this is:
      * <pre>
@@ -229,7 +229,7 @@ public class TimeUtil {
      */
     public static void queryRuntime(final Movie movie, final Timecode runtime) throws QTException {
         QT.manageSession();
-        final int totalSeconds = movie.getTime() / movie.getTimeScale();
+        final double totalSeconds = (double) movie.getTime() / (double) movie.getTimeScale();
         final double frames = totalSeconds * runtime.getFrameRate();
         runtime.setFrames(frames);
     }
