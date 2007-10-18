@@ -69,8 +69,8 @@ public class QTMovieFrame extends Frame {
      * @throws QTException
      */
     public QTMovieFrame(Movie movie) throws QTException {
-        super(movie.getDefaultDataRef().getUniversalResourceLocator());
-
+        super(QT.resolveName(movie));
+        
         /*
          * This call is important even if QTSession.open() has already been called. Because we use
          * QuickTime components in timers in this class we need to make sure that QTSession.close() is

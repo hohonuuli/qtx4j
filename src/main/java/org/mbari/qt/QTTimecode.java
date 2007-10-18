@@ -57,8 +57,7 @@ public class QTTimecode extends Timecode {
                                         StdQTConstants.movieTrackMediaType);
 
         if (timecodeTrack == null) {
-            throw new QT4JException("No timecode track was found on " +
-                                    movie.getDefaultDataRef().getUniversalResourceLocator());
+            throw new QT4JException("No timecode track was found on " + QT.resolveName(movie));
         }
         
 
@@ -78,14 +77,15 @@ public class QTTimecode extends Timecode {
                 }
             } catch (QTException ex) {
                 if (log.isDebugEnabled()) {
-                    log.debug("Call to timeCodeMedia.getTimeCodeDescription(" + i + ") failed");
+                    log.debug("Call to timeCodeMedia.getTimeCodeDescription(" +
+                            i + ") failed");
                 }
             }
         }
         
         if (timeCodeDescription == null) {
             throw new QT4JException("Unable to find TimeCodeDescription for TimeCode track in " +
-                    movie.getDefaultDataRef().getUniversalResourceLocator());
+                    QT.resolveName(movie));
         }
 
         final TimeCodeDef timeCodeDef = timeCodeDescription.getTimeCodeDef();

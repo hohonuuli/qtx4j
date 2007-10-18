@@ -38,7 +38,7 @@ public class MovieInspector {
     
     public static void inspect(Movie movie) throws QTException {
         QT.manageSession();
-        final String url = movie.getDefaultDataRef().getUniversalResourceLocator();
+        final String url = QT.resolveName(movie);
         
         System.out.println("----- Inspecting " + url + " -----");
         System.out.println("\tIs MPEG = " + QT.isMpegMovie(movie));

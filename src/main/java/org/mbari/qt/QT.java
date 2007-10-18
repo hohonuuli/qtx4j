@@ -180,7 +180,7 @@ public class QT {
         final MediaHandler mediaHandler = media.getHandler();
         final ComponentDescription info = mediaHandler.getInfo();
         if (log.isDebugEnabled()) {
-            log.debug(movie.getDefaultDataRef().getUniversalResourceLocator() + " is decoded by '" + info.getName() +
+            log.debug(resolveName(movie) + " is decoded by '" + info.getName() +
                       "' [type = " + QTUtils.fromOSType(info.getType()) + ": subtype = " +
                       QTUtils.fromOSType(info.getSubType()) + "]");
         }
@@ -192,7 +192,7 @@ public class QT {
             int ctype = id.getCType();
             String cName = QTUtils.fromOSType(ctype);
             if (log.isDebugEnabled()) {
-                log.debug(movie.getDefaultDataRef().getUniversalResourceLocator() + " compresses it's image frames using " + cName);
+                log.debug(resolveName(movie) + " compresses it's image frames using " + cName);
             }
             isMpeg = cName.equalsIgnoreCase("mpeg");
         }
@@ -202,7 +202,7 @@ public class QT {
         }
         
         if (log.isDebugEnabled() && isMpeg) {
-            log.debug(movie.getDefaultDataRef().getUniversalResourceLocator() + " is an MPEG.");
+            log.debug(resolveName(movie) + " is an MPEG.");
         }
 
         return isMpeg;
@@ -393,6 +393,25 @@ public class QT {
      */
     public static String toDataRefURL(URL url) {
         return url.toExternalForm().replaceFirst("^file:/(?=[a-zA-Z0-9])", "file:///");
+    }
+    
+    
+    /**
+     * Attempt to resolve the URL of the movie file. Some files types can't
+     * be reolved (e.g. AVI's). If a name can't be resolved an empty string, "",
+     * is returned.
+     * @param movie The movie whose URL we want to resolve
+     * @return The String URL, or an empty string, "", f resolution is not possible.
+     */
+    public static String resolveName(Movie movie) {
+        String name = "";
+        try {
+            name = movie.getDefaultDataRef().getUniversalResourceLocator();
+        }
+        catch (Exception e) {
+            log.info("Unable to resolve the URL for the movie", e);
+        }
+        return name;
     }
     
     /**

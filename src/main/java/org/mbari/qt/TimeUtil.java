@@ -67,7 +67,7 @@ public class TimeUtil {
                                   StdQTConstants.movieTrackMediaType);
 
         if (timecodeTrack != null) {
-            log.info("A Timecode track already exists in " + movie.getDefaultDataRef().getUniversalResourceLocator());
+            log.info("A Timecode track already exists in " + QT.resolveName(movie));
         }
         else {
 
@@ -77,7 +77,7 @@ public class TimeUtil {
 
             // Create the timecode track and media
             if (visualTrack == null) {
-                log.info("No visual track exists in " + movie.getDefaultDataRef().getUniversalResourceLocator());
+                log.info("No visual track exists in " + QT.resolveName(movie));
             }
             else {
 
@@ -194,7 +194,7 @@ public class TimeUtil {
             }
             TimeInfo timeInfo = new TimeInfo(0, 0);
             timeInfo = movie.getNextInterestingTime(StdQTConstants.nextTimeStep, null, timeInfo.time, 1.0f);
-            log.debug(movie.getDefaultDataRef().getUniversalResourceLocator() + " is an MPEG." +
+            log.debug(QT.resolveName(movie) + " is an MPEG." +
                     "timeInfo.time = " + timeInfo.time + " timeInfo.duration = " + timeInfo.duration);
             frameRate = 1.0 / (timeInfo.duration / timeScale);
         }
@@ -260,7 +260,7 @@ public class TimeUtil {
 
         if (timecodeTrack == null) {
             if (log.isDebugEnabled()) {
-                log.debug("No timecode track was found in " + movie.getDefaultDataRef().getUniversalResourceLocator());
+                log.debug("No timecode track was found in " + QT.resolveName(movie));
             }
             timecode.setTimecode(Timecode.EMPTY_TIMECODE_STRING);
         }
