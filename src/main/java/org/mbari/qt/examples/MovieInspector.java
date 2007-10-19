@@ -42,7 +42,8 @@ public class MovieInspector {
         
         System.out.println("----- Inspecting " + url + " -----");
         System.out.println("\tIs MPEG = " + QT.isMpegMovie(movie));
-
+        System.out.println("Movie Duration = " + movie.getDuration());
+        System.out.println("Movie TimeScale = " + movie.getTimeScale());
         
         System.out.println("\tSupported Export formats:");
         Set<MovieExportFormat> componentIdentifiers = QT.listMovieExportFormats(movie);
@@ -58,8 +59,9 @@ public class MovieInspector {
             System.out.println("\tInspecting Track #" + i + " (" + track + ")");
             System.out.println("\t\tTrack Duration = " + track.getDuration());
             final Media media = track.getMedia();
-            System.out.println("\t\tMedia Duration = " + media.getDuration());
-            System.out.println("\t\tMedia TimeScale = " + media.getTimeScale());
+            System.out.println("\t\tMedia SampleCount = " + media.getSampleCount());
+            //System.out.println("\t\tMedia Duration = " + media.getDuration());
+            //System.out.println("\t\tMedia TimeScale = " + media.getTimeScale());
             final MediaHandler mediaHandler = media.getHandler();
             final ComponentDescription info = mediaHandler.getInfo();
             System.out.println("\t\tDecoded by '" + info.getName() +
@@ -69,7 +71,7 @@ public class MovieInspector {
             System.out.println("\t\tDecoder info = " + info.getInformationString());
         }
 
-        //System.out.println("\tFrame Rate = " + TimeUtil.estimateFrameRate(movie));
+        System.out.println("\tFrame Rate = " + TimeUtil.estimateFrameRate(movie));
 
     }
     

@@ -48,7 +48,6 @@ public class QT {
 
     private static final Logger log = LoggerFactory.getLogger(QT.class);
     private static QT instance;
-    private Thread shutdownHook;
 
     /** Creates a new instance of QTSessionCheck */
     QT() throws QTException {
@@ -56,8 +55,7 @@ public class QT {
         QTSession.open();
 
         // create shutdown handler
-        shutdownHook = new Thread() {
-
+        final Thread shutdownHook = new Thread() {
             public void run() {
                 QTSession.close();
             }

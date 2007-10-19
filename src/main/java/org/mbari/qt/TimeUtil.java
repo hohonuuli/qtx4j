@@ -15,14 +15,11 @@ import org.slf4j.LoggerFactory;
 import quicktime.QTException;
 import quicktime.qd.QDDimension;
 import quicktime.std.StdQTConstants;
-import quicktime.std.StdQTException;
 import quicktime.std.clocks.TimeRecord;
-import quicktime.std.comp.ComponentDescription;
 import quicktime.std.movies.Movie;
 import quicktime.std.movies.TimeInfo;
 import quicktime.std.movies.Track;
 import quicktime.std.movies.media.Media;
-import quicktime.std.movies.media.MediaHandler;
 import quicktime.std.movies.media.TimeCodeMedia;
 import quicktime.std.qtcomponents.TimeCodeDef;
 import quicktime.std.qtcomponents.TimeCodeDescription;
@@ -31,7 +28,6 @@ import quicktime.std.qtcomponents.TimeCodeTime;
 import quicktime.std.qtcomponents.TimeCoder;
 import quicktime.util.EndianOrder;
 import quicktime.util.QTHandle;
-import quicktime.util.QTUtils;
 
 /**
  *
@@ -179,11 +175,9 @@ public class TimeUtil {
      */
     public static final float estimateFrameRate(final Movie movie) throws QTException {
         QT.manageSession();
-        final Track videoTrack = movie.getIndTrackType(1, StdQTConstants.visualMediaCharacteristic,
-                                     StdQTConstants.movieTrackCharacteristic);
-        final Media media = videoTrack.getMedia();
-        final double duration = media.getDuration(); // Units per movie
-        final double timeScale = media.getTimeScale(); // Units per second
+        
+        //final double duration = movie.getDuration(); // Units per movie
+        final double timeScale = movie.getTimeScale(); // Units per second
         double frameRate = -1;
                 
         if (QT.isMpegMovie(movie)) {
@@ -199,8 +193,11 @@ public class TimeUtil {
             frameRate = 1.0 / (timeInfo.duration / timeScale);
         }
         else {
+            final Track videoTrack = movie.getIndTrackType(1, StdQTConstants.visualMediaCharacteristic,
+                                     StdQTConstants.movieTrackCharacteristic);
+            final Media media = videoTrack.getMedia();
             final double sampleCount = media.getSampleCount(); // Frames per Movie
-            frameRate = timeScale * sampleCount / duration;
+            frameRate = timeScale * sampleCount / videoTrack.getDuration();
         }
 
         return (float) frameRate;
