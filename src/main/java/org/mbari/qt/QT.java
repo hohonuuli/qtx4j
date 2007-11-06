@@ -55,8 +55,14 @@ public class QT {
 
         // create shutdown handler
         final Thread shutdownHook = new Thread() {
+            @Override
             public void run() {
-                QTSession.close();
+                try {
+                    QTSession.close();
+                }
+                catch (Exception e) {
+                    log.error("An error occurred while closing the QuickTime session", e);
+                }
             }
         };
 
