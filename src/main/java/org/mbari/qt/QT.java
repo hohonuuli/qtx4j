@@ -401,10 +401,10 @@ public class QT {
     
     /**
      * Attempt to resolve the URL of the movie file. Some files types can't
-     * be reolved (e.g. AVI's). If a name can't be resolved an empty string, "",
+     * be resolved (e.g. AVI's). If a name can't be resolved an empty string, "",
      * is returned.
      * @param movie The movie whose URL we want to resolve
-     * @return The String URL, or an empty string, "", f resolution is not possible.
+     * @return The String URL, or an empty string, "", if resolution is not possible.
      */
     public static String resolveName(Movie movie) {
         String name = "";
