@@ -319,6 +319,10 @@ public class TimeUtil {
     
     public static int timecodeToTime(final Movie movie, final Timecode timecode) throws QTException {
         // TODO implement: Look at Track.trackTimeToMediaTime(int) seconds = 
+        /*
+         * Look in QuickTimeComponents.h. There are C function such as TCTimeCodeCounterToFrameNumber
+         * that may get me there. I need to see if they are exposed in QuickTime for Java
+         */
         return 0;
     }
     
