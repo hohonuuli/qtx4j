@@ -41,7 +41,7 @@ public class QTMovieFrameTest {
      * @throws InterruptedException
      * @throws QTException
      */
-    @Test public void run(String url) throws QTException, InterruptedException {
+    public void run(String url) throws QTException, InterruptedException {
 
 
         QTSession.open();
@@ -67,7 +67,8 @@ public class QTMovieFrameTest {
      * Method description
      *
      */
-    @Test public void testAllMovies() {
+    @Test 
+    public void testAllMovies() {
         String[] urls = SupportUtil.getTestMovies();
         for (String url : urls) {
             try {

@@ -378,7 +378,7 @@ public class QT {
         }
         DataRef dataRef = new DataRef(refUrl);
         Movie movie = Movie.fromDataRef(dataRef, StdQTConstants.newMovieActive);
-        TaskAllMovies.addMovieAndStart();
+        //TaskAllMovies.addMovieAndStart();
         movie.prePreroll(0, 1.0f);
         movie.preroll(0, 1.0f);
         return movie;

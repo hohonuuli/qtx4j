@@ -18,10 +18,10 @@ import java.net.URL;
 public class SupportUtil {
     
     //public static final String DEFAULT_MOVIE = "/wonderwall.mov";
-    public static final String DEFAULT_MOVIE = "/Users/brian/workspace/vars-csiro/20071011231117_S1_N1.mov";
-    public static final String TIMECODE_MOVIE = "/cystisoma.mov";
+    public static final String DEFAULT_MOVIE = "/20060927T09250000Z-h264.mov";
+    public static final String TIMECODE_MOVIE = "/20060927T09250000Z.mov";
     public static final float FRAMERATE_NETWORK = 29.97F;
-    public static final float FRAMERATE_DEFAULT = 11.60F;
+    public static final float FRAMERATE_DEFAULT = 29.97F;
     public static final float FRAMERATE_TIMECODE = 29.97F;
             
     
@@ -48,7 +48,7 @@ public class SupportUtil {
      * @return 
      */
     public static String getNetworkMovieFile() {
-        return "http://oceana/projects/aved-db/tests/2613_02_23_59_20.results.mpeg";
+        return "https://oceana.mbari.org/projects/aved-db/tests/2613_02_23_59_20.results.mpeg";
     }
     
     public static String[] getTestMovies() {
