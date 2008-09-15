@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.Test;
@@ -49,6 +50,7 @@ public class TimeCodeTrackLifeCycleTest {
      *
      */
     @Test()
+    @Ignore
     public void testLifeCycle() {
         
         
