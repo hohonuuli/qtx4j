@@ -9,9 +9,9 @@
     <url>http://oceana.shore.mbari.org/projects/${project.artifactId}</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
     <scm>
-        <connection>scm:svn:http://qtx4j.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/trunk</developerConnection>
-        <url>https://qtx4j.googlecode.com/svn/trunk</url>
+        <connection>scm:svn:http://qtx4j.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://qtx4j.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://qtx4j.googlecode.com/svn/trunk/</url>
     </scm>
     <developers>
         <developer>
