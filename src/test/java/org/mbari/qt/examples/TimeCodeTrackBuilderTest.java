@@ -20,6 +20,7 @@ package org.mbari.qt.examples;
 
 import junit.framework.Assert;
 import junit.framework.JUnit4TestAdapter;
+import org.junit.Ignore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.Test;
@@ -66,7 +67,9 @@ public class TimeCodeTrackBuilderTest {
      * Method description
      *
      */
-    @Test public void testAllMovies() {
+    @Test 
+    @Ignore
+    public void testAllMovies() {
         //String[] urls = SupportUtil.getTestMovies();
         String[] urls = {SupportUtil.getLocalMovieFile(SupportUtil.DEFAULT_MOVIE)};
         for (String url : urls) {

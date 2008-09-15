@@ -16,6 +16,7 @@ import java.net.URL;
 import junit.framework.JUnit4TestAdapter;
 import junit.textui.TestRunner;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mbari.movie.Timecode;
 import org.mbari.qt.QT;
@@ -100,7 +101,9 @@ public class VCRTest {
      * Method description
      *
      */
-    @Test public void testAllMovies() {
+    @Test 
+    @Ignore
+    public void testAllMovies() {
         String[] urls = {SupportUtil.getLocalMovieFile(SupportUtil.TIMECODE_MOVIE),
         SupportUtil.getLocalMovieFile(SupportUtil.DEFAULT_MOVIE)};
         for (String url : urls) {
