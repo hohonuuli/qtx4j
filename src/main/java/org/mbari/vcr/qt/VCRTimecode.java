@@ -185,6 +185,7 @@ public class VCRTimecode implements IVCRTimecode {
         os.remove(observer);
     }
 
+    @Override
     public String toString() {
         return timecode == null ? Timecode.EMPTY_TIMECODE_STRING : timecode.toString();
     }

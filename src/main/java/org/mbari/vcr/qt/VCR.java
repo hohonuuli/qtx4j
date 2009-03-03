@@ -154,6 +154,7 @@ public class VCR extends VCRAdapter {
      *
      * @param timecode
      */
+    @Override
     public void seekTimecode(final Timecode timecode) {
         try {
             float rate = movie.getRate();

@@ -21,7 +21,7 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import org.mbari.util.ImageUtil;
+import org.mbari.awt.image.ImageUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,7 +129,7 @@ public class GrabUtil {
                     }
                     try {
                         //RenderedOp renderedImage = JAI.create("AWTImage", finalImage);
-                        RenderedImage renderedImage = ImageUtil.toBufferedImage(finalImage);
+                        RenderedImage renderedImage = ImageUtilities.toBufferedImage(finalImage);
                         ImageIO.write(renderedImage, ext, file);
                     } catch (IOException ex) {
                         throw new RuntimeException("An error occured while trying to write to " + file.getAbsolutePath(), ex);
