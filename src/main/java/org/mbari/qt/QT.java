@@ -25,6 +25,7 @@ import quicktime.QTSession;
 import quicktime.io.IOConstants;
 import quicktime.io.QTFile;
 import quicktime.std.StdQTConstants;
+import quicktime.std.StdQTConstants4;
 import quicktime.std.StdQTException;
 import quicktime.std.comp.ComponentDescription;
 import quicktime.std.comp.ComponentIdentifier;
@@ -360,8 +361,10 @@ public class QT {
     }
 
     /**
-     * Open a movie using a url as a source reference
-     *
+     * Open a movie using a url as a source reference. You will need to call
+     * movie.prePreroll and movie.preroll after opening the movie You can
+     * implement a MoviePrePreroll interface to execute other tasks when the
+     * prePreroll is completed.
      *
      * @param url
      *
@@ -376,10 +379,8 @@ public class QT {
             log.debug("Opening " + refUrl);
         }
         DataRef dataRef = new DataRef(refUrl);
-        Movie movie = Movie.fromDataRef(dataRef, StdQTConstants.newMovieActive);
-        //TaskAllMovies.addMovieAndStart();
-        movie.prePreroll(0, 1.0f);
-        movie.preroll(0, 1.0f);
+        Movie movie = Movie.fromDataRef(dataRef, 
+                StdQTConstants4.newMovieAsyncOK | StdQTConstants.newMovieActive);
         return movie;
     }
 

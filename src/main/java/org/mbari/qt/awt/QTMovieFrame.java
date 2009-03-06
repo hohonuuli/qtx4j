@@ -92,8 +92,8 @@ public class QTMovieFrame extends Frame {
         runtime = new Timecode();
         runtime.setRepresentation(Timecode.Representation.RUNTIME);
         initialize();
-        movie.prePreroll(0, 1.0f);
-        movie.preroll(0, 1.0f);
+        //movie.prePreroll(0, 1.0f);
+        //movie.preroll(0, 1.0f);
     }
 
     Panel getInfoPanel() {
@@ -229,6 +229,8 @@ public class QTMovieFrame extends Frame {
              * QTConstants can be combined using OR (i.e. '|')
              */
             Movie movie = Movie.fromDataRef(dataRef, StdQTConstants.newMovieActive);
+            movie.prePreroll(0, 1.0f);
+            movie.preroll(0, 1.0f);
             QTMovieFrame f = new QTMovieFrame(movie);
             f.setVisible(true);
             movie.start();
