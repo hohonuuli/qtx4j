@@ -379,8 +379,7 @@ public class QT {
             log.debug("Opening " + refUrl);
         }
         DataRef dataRef = new DataRef(refUrl);
-        Movie movie = Movie.fromDataRef(dataRef, 
-                StdQTConstants4.newMovieAsyncOK | StdQTConstants.newMovieActive);
+        Movie movie = Movie.fromDataRef(dataRef, StdQTConstants.newMovieActive);
         return movie;
     }
 

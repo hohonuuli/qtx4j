@@ -7,9 +7,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
-package org.mbari.qt.awt; 
+package org.mbari.qt.awt;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -26,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mbari.movie.Timecode;
 import org.mbari.qt.QT;
-import org.mbari.qt.QT4JException;
 import org.mbari.qt.QTTimecode;
 import org.mbari.qt.TimeUtil;
 import org.mbari.util.IObserver;
@@ -59,6 +56,8 @@ public class QTMovieFrame extends Frame {
     QTTimecode timecode;
     TimecodeLabel timecodeLabel;
     private final Movie movie;
+    private final Timer runtimeTimer;
+    private final Timer timecodeTimer;
 
     /**
      * Constructs ...
@@ -68,9 +67,9 @@ public class QTMovieFrame extends Frame {
      *
      * @throws QTException
      */
-    public QTMovieFrame(Movie movie) throws QTException {
-        super(QT.resolveName(movie));
-        
+    public QTMovieFrame(Movie qtMovie) throws QTException {
+        super(QT.resolveName(qtMovie));
+
         /*
          * This call is important even if QTSession.open() has already been called. Because we use
          * QuickTime components in timers in this class we need to make sure that QTSession.close() is
@@ -78,22 +77,95 @@ public class QTMovieFrame extends Frame {
          * you can call open and close as often as you like.
          */
         QT.manageSession();
-        this.movie = movie;
+        this.movie = qtMovie;
 
-        try {
-            timecode = new QTTimecode(movie);
-            timecode.setRepresentation(Timecode.Representation.TIMECODE);
-        }
-        catch (QT4JException ex) {
-            log.debug("Not able to monitor timecode track", ex);
-            timecode = null;
-        }
-
-        runtime = new Timecode();
-        runtime.setRepresentation(Timecode.Representation.RUNTIME);
         initialize();
-        //movie.prePreroll(0, 1.0f);
-        //movie.preroll(0, 1.0f);
+
+        /*
+         * This timer reads timecode from the quicktime movie and updates
+         * the UI label
+         */
+        timecodeTimer = new Timer(100, new ActionListener() {
+
+            private int attemptCount = 0;
+
+            public void actionPerformed(ActionEvent e) {
+                // Kill the time if we are unable to access the timecode repeatedly
+                if (attemptCount > 200) {
+                    timecodeTimer.stop();
+                }
+
+                try {
+                    getTimecode().updateTimecode();
+                    attemptCount = 0;
+                }
+                catch (Exception ex) {
+                    log.debug("Failed to update timecode", ex);
+                    attemptCount++;
+                }
+            }
+        });
+        timecodeTimer.start();
+
+        /*
+         * This timer reads runtime from the quicktime movie and updates
+         * the UI label
+         */
+        runtimeTimer = new Timer(100, new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (movie != null) {
+                    try {
+                        TimeUtil.queryRuntime(movie, getRuntime());
+                    }
+                    catch (QTException ex) {
+                        runtimeLabel.setText(Timecode.EMPTY_TIMECODE_STRING);
+                        log.error("Problem fetching time from movie", ex);
+                    }
+                    catch (Exception ex) {
+                        runtimeLabel.setText(Timecode.EMPTY_TIMECODE_STRING);
+                        log.error("Problem fetching time from movie", ex);
+                    }
+                }
+            }
+        });
+        runtimeTimer.start();
+
+    }
+
+    private Timecode getRuntime() {
+        if (runtime == null) {
+            runtime = new Timecode();
+            runtime.setRepresentation(Timecode.Representation.RUNTIME);
+            runtime.addObserver(getRuntimeLabel());
+
+            try {
+                float frameRate = TimeUtil.estimateFrameRate(movie);
+                runtime.setFrameRate(frameRate);
+            }
+            catch (QTException e) {
+                log.error("Unable to estimate frame rate from movie");
+            }
+
+
+        }
+        return runtime;
+    }
+
+    private QTTimecode getTimecode() {
+        if (timecode == null) {
+            try {
+                timecode = new QTTimecode(movie);
+                timecode.setRepresentation(Timecode.Representation.TIMECODE);
+                timecode.addObserver(getTimecodeLabel());
+
+            }
+            catch (Exception ex) {
+                log.debug("Not able to monitor timecode track", ex);
+                timecode = null;
+            }
+        }
+        return timecode;
     }
 
     Panel getInfoPanel() {
@@ -139,36 +211,7 @@ public class QTMovieFrame extends Frame {
         if (runtimeLabel == null) {
             runtimeLabel = new TimecodeLabel();
             runtimeLabel.setText(Timecode.EMPTY_TIMECODE_STRING);
-            runtime.addObserver(runtimeLabel);
 
-            try {
-                float frameRate = TimeUtil.estimateFrameRate(movie);
-                runtime.setFrameRate(frameRate);
-            }
-            catch (QTException e) {
-                log.error("Unable to estimate frame rate from movie");
-            }
-
-            Timer timer = new Timer(100, new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    if (movie != null) {
-                        try {
-                            TimeUtil.queryRuntime(movie, runtime);
-                        }
-                        catch (QTException ex) {
-                            runtimeLabel.setText(Timecode.EMPTY_TIMECODE_STRING);
-                            log.error("Problem fetching time from movie", ex);
-                        }
-                        catch (Exception ex) {
-                            runtimeLabel.setText(Timecode.EMPTY_TIMECODE_STRING);
-                            log.error("Problem fetching time from movie", ex);
-                        }
-                    }
-                }
-
-            });
-            timer.start();
         }
 
         return runtimeLabel;
@@ -186,7 +229,8 @@ public class QTMovieFrame extends Frame {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             timecode.updateTimecode();
-                        } catch (QTException ex) {
+                        }
+                        catch (Exception ex) {
                             log.debug("Failed to update timecode", ex);
                         }
                     }
