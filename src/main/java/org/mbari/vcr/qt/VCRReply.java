@@ -30,15 +30,20 @@ public class VCRReply extends VCRReplyAdapter {
         vcrState = new VCRState(movie);
     }
 
+    @Override
     public IVCRState getVcrState() {
         return super.getVcrState();    //To change body of overridden methods use File | Settings | File Templates.
     }
     
+    @Override
     public boolean isTimecodeReply() {
         return true;
     }
 
+    @Override
     public boolean isStatusReply() {
         return true;
     }
+
+
 }

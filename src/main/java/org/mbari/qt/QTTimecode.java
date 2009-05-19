@@ -109,9 +109,14 @@ public class QTTimecode extends Timecode {
      */
     public void updateTimecode() throws QTException {
         QT.manageSession();
-        TimeCodeInfo timeCodeInfo = timeCoder.getCurrent();
-        final long frame = timeCoder.toFrameNumber(timeCodeInfo.time, timeCodeInfo.definition);
-        setFrames(frame);
+        try {
+            TimeCodeInfo timeCodeInfo = timeCoder.getCurrent();
+            final long frame = timeCoder.toFrameNumber(timeCodeInfo.time, timeCodeInfo.definition);
+            setFrames(frame);
+        }
+        catch (QTException e) {
+            log.warn("Could not read timecode data", e);
+        }
     }
    
 }
