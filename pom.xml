@@ -101,8 +101,8 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
             <groupId>foxtrot</groupId>
-            <artifactId>foxtrot</artifactId>
-            <version>2.0</version>
+            <artifactId>foxtrot-core</artifactId>
+            <version>3.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -136,27 +136,15 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.6</version>
+            <version>1.5.11</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.6</version>
+            <version>1.5.11</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
-            <scope>test</scope>
-        </dependency> -->
-<!-- <dependency>
-            <groupId>javax.media</groupId>
-            <artifactId>jai_core</artifactId>
-            <version>1.1.2_01</version>
-            <scope>compile</scope>
-        </dependency> -->
     </dependencies>
     <build>
         <plugins>
@@ -188,8 +176,7 @@
                 <configuration>
                     <!-- <excludes>
                         <exclude>**/*.java</exclude>
-                    </excludes> -->
-                </configuration>
+                    </excludes> --></configuration>
             </plugin>
             
 <!-- Generate the assembly -->
@@ -219,12 +206,12 @@
                 </configuration>
             </plugin>
         </plugins>
-        <extensions>
+        <!-- <extensions>
             <extension>
-                <groupId>org.jvnet.wagon-svn</groupId>
-                <artifactId>wagon-svn</artifactId>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
             </extension>
-        </extensions>
+        </extensions> -->
     </build>
     <reporting>
         <plugins>
