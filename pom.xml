@@ -4,7 +4,7 @@
     <groupId>org.mbari</groupId>
     <artifactId>qtx4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.13-SNAPSHOT</version>
+    <version>0.13</version>
     <name>QTX4J</name>
     <url>http://code.google.com/p/qtx4j/</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
@@ -100,7 +100,7 @@
 <!-- QuickTime for Java is also need to build this app               -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
-            <groupId>foxtrot</groupId>
+            <groupId>net.sourceforge.foxtrot</groupId>
             <artifactId>foxtrot-core</artifactId>
             <version>3.0</version>
         </dependency>
@@ -113,18 +113,18 @@
         <dependency>
             <groupId>imagej</groupId>
             <artifactId>imagej</artifactId>
-            <version>1.37</version>
+            <version>1.41</version>
         </dependency>
         <dependency>
             <groupId>org.mbari</groupId>
             <artifactId>mbarix4j</artifactId>
-            <version>[1.7,)</version>
+            <version>1.8.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.mbari</groupId>
             <artifactId>vcr4j</artifactId>
-            <version>[1.5,)</version>
+            <version>1.6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -136,13 +136,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.11</version>
+            <version>1.6.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.11</version>
+            <version>1.6.0</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
@@ -206,12 +206,12 @@
                 </configuration>
             </plugin>
         </plugins>
-        <!-- <extensions>
+        <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav</artifactId>
             </extension>
-        </extensions> -->
+        </extensions>
     </build>
     <reporting>
         <plugins>
@@ -267,9 +267,14 @@
     </reporting>
     <distributionManagement>
         <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>googlecode</id>
-            <url>svn:https://mbari-maven-repository.googlecode.com/svn/maven2</url>
+            <uniqueVersion>true</uniqueVersion>
+            <id>mbari-maven-repository</id>
+            <url>dav:https://mbari-maven-repository.googlecode.com/svn/repository</url>
         </repository>
+        <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>mbari-maven-snapshot-repository</id>
+            <url>dav:https://mbari-maven-repository.googlecode.com/svn/snapshot-repository</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
