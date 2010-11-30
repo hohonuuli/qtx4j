@@ -1,5 +1,5 @@
 /*
- * @(#)VCR.java   2010.11.29 at 04:16:10 PST
+ * @(#)VCRWithDisplay.java   2010.11.29 at 04:16:50 PST
  *
  * Copyright 2009 MBARI
  *
@@ -13,63 +13,81 @@
 
 
 
-/*
-VCR.java
- *
-Created on February 21, 2007, 2:50 PM
- *
-To change this template, choose Tools | Template Manager
-and open the template in the editor.
- */
 package org.mbari.vcr.qt;
 
+import java.awt.Frame;
+import java.net.URL;
+import org.mbari.framegrab.IGrabber;
+import org.mbari.framegrab.MovieGrabber;
 import org.mbari.movie.Timecode;
+import org.mbari.qt.QT;
 import org.mbari.qt.QT4JException;
 import org.mbari.qt.TimeUtil;
+import org.mbari.qt.awt.QTMovieFrame;
+import javax.swing.SwingUtilities;
 import org.mbari.vcr.VCRAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import quicktime.QTException;
 import quicktime.std.StdQTException;
 import quicktime.std.movies.Movie;
+import quicktime.std.movies.MoviePrePreroll;
 
 /**
- *
- * @author brian
+ * @author Brian Schlining
+ * @since 2010-11-29
  */
-public class VCR extends VCRAdapter {
+public class VCRWithDisplay extends VCRAdapter {
 
     /** Multiplier used to determine shuttle rates */
     private static final int SHUTTLE_RATE = 3;
     private static final float SHUTTLE_RATE_DENOMINATOR = 51.0F;
-    private static final Logger log = LoggerFactory.getLogger(VCR.class);
-    private final Movie movie;
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    private Frame currentVideoFrame;
+    private IGrabber grabber;
+    private Movie movie;
+    private QTTimecode timecode;
 
     /**
      * Creates a new instance of VCR
      *
-     * @param movie
      *
-     *
-     * @throws QT4JException
-     * @throws QTException
-     */
-    public VCR(final Movie movie) throws QTException, QT4JException {
-        this(movie, TimeSource.AUTO);
-    }
-
-    /**
-     * Constructs ...
-     *
-     * @param movie
+     * @param movieRef
      * @param timeSource
      *
-     * @throws QT4JException
-     * @throws QTException
      */
-    public VCR(final Movie movie, TimeSource timeSource) throws QTException, QT4JException {
-        this.movie = movie;
-        vcrReply = new VCRReply(movie, timeSource);
+    public VCRWithDisplay(String movieRef, TimeSource timeSource) {
+        quickTimeCheck();
+        openVideo(movieRef);
+        try {
+            vcrReply = new VCRReply(movie, timeSource);
+        }
+        catch (QTException e) {
+           throw new QT4JException("An error occurred while initializing the VCRReply", e); 
+        }
+    }
+    
+    public void disconnect() {
+        if (currentVideoFrame != null) {
+            try {
+                currentVideoFrame.dispose();
+            }
+            catch (Exception ex) {
+                log.warn("An error occurred while trying to close a QuickTime movie Frame", ex);
+            }
+        }
+        
+        if (grabber != null) {
+            try {
+                grabber.dispose();   
+            }
+            catch (Exception ex) {
+                log.warn("An error occurred while trying to close a QuickTime image grabber", ex);                
+            }
+        }
+        
+        timecode = null;
+            
     }
 
     /**
@@ -116,13 +134,33 @@ public class VCR extends VCRAdapter {
     }
 
     /**
-     * Method description
-     *
-     *
-     * @return
+    * @return a {@link IGrabber} for grabbing images form the movie
      */
-    public Movie getMovie() {
-        return movie;
+    public IGrabber getGrabber() {
+        if ((grabber == null) && (movie != null)) {
+            grabber = new MovieGrabber(movie);
+        }
+
+        return grabber;
+    }
+
+    private void openVideo(String movieRef) {
+        URL url = null;
+
+        try {
+            url = new URL(movieRef);
+            log.debug("Attempting to open the QuickTime movie at " + url.toExternalForm());
+            movie = QT.openMovieFromUrl(url);
+            movie.prePreroll(0, 1.0f, new PrepMovie());    // All the interesting stuff happens here.
+        }
+        catch (Exception e) {}
+    }
+    
+    public void getQTTimecode() {
+        if (timecode == null) {
+            timecode = new QTTimecode(movie);
+            timecode.updateTimecode();
+        }
     }
 
     /**
@@ -145,6 +183,21 @@ public class VCR extends VCRAdapter {
         }
         catch (StdQTException ex) {
             log.error("Play failed", ex);
+        }
+    }
+
+    private void quickTimeCheck() {
+        try {
+
+            // Check to see if quicktime is installed first
+            Class.forName("quicktime.QTSession");
+        }
+        catch (final Throwable e) {
+            String javaHome = System.getProperty("java.home");
+            String javaVmName = System.getProperty("java.vm.name");
+
+            throw new QT4JException("QuickTime for Java is not installed in '" + 
+                    javaVmName + "' located at " + javaHome);
         }
     }
 
@@ -175,6 +228,7 @@ public class VCR extends VCRAdapter {
     @Override
     public void requestTimeCode() {
         ((VCRTimecode) getVcrTimecode()).updateTimecode();
+        getQTTimecode.updateTimecode();
     }
 
     /**
@@ -277,6 +331,50 @@ public class VCR extends VCRAdapter {
         }
         catch (StdQTException ex) {
             log.error("Stop failed", ex);
+        }
+    }
+
+    private class PrepMovie implements MoviePrePreroll {
+
+        /**
+         *
+         * @param movie
+         * @param errorCode
+         */
+        public void execute(final Movie movie, int errorCode) {
+            log.debug("Executing preroll tasks");
+
+            try {
+
+                /*
+                 * Once we have enough movie loaded display it on the
+                 * Swing event thread.
+                 */
+                SwingUtilities.invokeLater(new Runnable() {
+
+                    public void run() {
+                        try {
+                            currentVideoFrame = new QTMovieFrame(movie);
+                            currentVideoFrame.pack();
+                            currentVideoFrame.setVisible(true);
+
+                            if (log.isDebugEnabled()) {
+                                String msg = "Opened QuickTime movie:\n\tIVCR = " + this.toString() +
+                                             "\n\tmovie = " + movie.toString();
+
+                                log.debug(msg);
+                            }
+                        }
+                        catch (Exception ex) {
+                            throw new QT4JException("Failed to open " + movie.toString(), ex);
+                        }
+                    }
+
+                });
+            }
+            catch (Exception ex) {
+                throw new QT4JException("Failed to open " + movie.toString(), ex);
+            }
         }
     }
 }

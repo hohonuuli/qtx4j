@@ -13,7 +13,7 @@ package org.mbari.qt;
  *
  * @author brian
  */
-public class QT4JException extends Exception {
+public class QT4JException extends RuntimeException {
     
     /** Creates a new instance of QT4JException */
     public QT4JException(String message) {
