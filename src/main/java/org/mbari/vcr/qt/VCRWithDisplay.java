@@ -157,12 +157,13 @@ public class VCRWithDisplay extends VCRAdapter {
         catch (Exception e) {}
     }
     
-    public void getQTTimecode() {
-        if (timecode == null) {
-            timecode = new QTTimecode(movie);
-            timecode.updateTimecode();
-        }
-    }
+    // public QTTimecode getQTTimecode() {
+    //     if (timecode == null) {
+    //         timecode = new QTTimecode(movie);
+    //         timecode.updateTimecode();
+    //     }
+    //     return timecode;
+    // }
 
     /**
      * Method description
@@ -229,7 +230,7 @@ public class VCRWithDisplay extends VCRAdapter {
     @Override
     public void requestTimeCode() {
         ((VCRTimecode) getVcrTimecode()).updateTimecode();
-        getQTTimecode.updateTimecode();
+        //getQTTimecode().updateTimecode();
     }
 
     /**
