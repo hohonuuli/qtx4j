@@ -22,6 +22,7 @@ import org.mbari.framegrab.MovieGrabber;
 import org.mbari.movie.Timecode;
 import org.mbari.qt.QT;
 import org.mbari.qt.QT4JException;
+import org.mbari.qt.QTTimecode;
 import org.mbari.qt.TimeUtil;
 import org.mbari.qt.awt.QTMovieFrame;
 import javax.swing.SwingUtilities;
