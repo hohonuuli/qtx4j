@@ -4,7 +4,7 @@
     <groupId>org.mbari</groupId>
     <artifactId>qtx4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.14</version>
+    <version>0.15</version>
     <name>QTX4J</name>
     <url>http://code.google.com/p/qtx4j/</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -118,13 +118,13 @@
         <dependency>
             <groupId>org.mbari</groupId>
             <artifactId>mbarix4j</artifactId>
-            <version>1.8.1</version>
+            <version>1.8.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.mbari</groupId>
             <artifactId>vcr4j</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -136,15 +136,15 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.4</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.4</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency -->
     </dependencies>
     <build>
         <plugins>
