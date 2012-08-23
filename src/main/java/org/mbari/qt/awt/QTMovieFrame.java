@@ -249,7 +249,7 @@ public class QTMovieFrame extends Frame {
         add(getMovieComponent(), BorderLayout.CENTER);
         add(getInfoPanel(), BorderLayout.SOUTH);
         pack();
-        setResizable(false);
+        //setResizable(false);
     }
 
     /**
