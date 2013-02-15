@@ -100,14 +100,14 @@
 <!-- QuickTime for Java is also need to build this app               -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
-            <groupId>net.sourceforge.foxtrot</groupId>
+            <groupId>foxtrot</groupId>
             <artifactId>foxtrot-core</artifactId>
-            <version>3.0</version>
+            <version>4.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -118,25 +118,25 @@
         <dependency>
             <groupId>org.mbari</groupId>
             <artifactId>mbarix4j</artifactId>
-            <version>1.8.4</version>
+            <version>1.9.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.mbari</groupId>
             <artifactId>vcr4j</artifactId>
-            <version>1.6.2</version>
+            <version>1.7.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.java.dev.swing-layout</groupId>
             <artifactId>swing-layout</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.4</version>
+            <version>1.7.2</version>
             <scope>compile</scope>
         </dependency>
         <!-- dependency>
