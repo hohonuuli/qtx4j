@@ -4,7 +4,7 @@
     <groupId>org.mbari</groupId>
     <artifactId>qtx4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.16-SNAPSHOT</version>
+    <version>0.16</version>
     <name>QTX4J</name>
     <url>http://code.google.com/p/qtx4j/</url>
     <description>QuickTime for Java utilities for simplifying the use of the QuickTime for Java API</description>
