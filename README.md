@@ -39,6 +39,6 @@ QTX4J Builds are available in [MBARI's Maven repository](https://code.google.com
 
 This project is built using [Maven 2](http://maven.apache.org). To build it type `mvn package` at the command line. The resulting build will be _target/qt4j-[version].jar_
 
-__EXAMPLE FOR RUNNING CLASS FROM COMMAND LINE__
+### EXAMPLE FOR RUNNING CLASS FROM COMMAND LINE
 mvn exec:java -Dexec.mainClass=org.mbari.qt.examples.TimeCodeTrackExample -Dexec.keepAlive=true
 
